@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .div1 {
+      background-color: red;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .div12 {
+      background-color: yellow;
+      margin-top: 30px;
+    }
+
+    .div2 {
+      background-color: blue;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <input class="input-throttle" type="text">
+  <div class="input-copy_container">
+    <div>input的输入值</div>
+    <div class="input-copy_text"></div>
+  </div>
+  <div class="text-cursor"></div>
+</body>
+<script>
+  function selectionSort(arr) {
+      let temp=0;
+      let min=0;
+      // 找出最小的下标，交换
+      for (let i=0; i<arr.length-1; i++) {
+        min=i
+        for (let j=i+1; j<arr.length; j++) {
+          if (arr[min]>arr[j]) {
+            min=j;
+          }
+        }
+        if (min!=i) {
+          temp=arr[i]
+          arr[i]=arr[min];
+          arr[min]=temp
+        }
+      }
+      return arr
+    }
+
+    function insertSort(arr) {
+      // 插入排序，默认第一个为有序的，然后拿n先做备份和前面对比，如果大于，就覆盖n, 再往前找，直到小于n，原地覆盖
+      for(let i=1;i<arr.length;i++) {
+        let value = arr[i]
+        let position = i;
+        while (position>0&&arr[position-1]>value) {
+          arr[position] = arr[position-1]
+          position--
+        }
+        arr[position] = value
+      }
+      return arr
+    }
+
+    const sortArr=[3, 66, 77, 33, 44, 99, 12, 8, 4, 876, 11111, 32];
+    // console.log(selectionSort(sortArr))
+    console.log(insertSort(sortArr))
+
+
+</script>
+
+</html>
