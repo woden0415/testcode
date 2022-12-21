@@ -67,8 +67,31 @@ function selectSort(list: number[]) {
  * @description 插入排序
  * @param list 
  * @returns []
+ * 1. 默认第0个是有序的，然后从第一个开始，先暂存当前值，然后通过指针不断遍历当前值之前数字
+ * 2. 如果指针值比当前值大，则右移一位（将对比值替换掉后一个 list[index+1]=list[list]）
+ * 3. 前提是索引值必须大于等于0，如果循环结束，那么将当前值赋值给[索引值+1]
  */
 function insertSort(list: number[]) {
+  console.log('list1 :>> ', list.join(','));
+  if (!list) return list;
+  if (!Array.isArray(list)) return list;
+  if (list.length === 0 || list.length === 1) return list;
+
+  const listLength = list.length;
+  let preIndex: number;
+  let currentValue: number;
+
+  for (let i = 1; i < listLength; i++) {
+    preIndex = i - 1;
+    currentValue = list[i]
+
+    while (preIndex >= 0 && list[preIndex] > currentValue) {
+      list[preIndex + 1] = list[preIndex]
+      preIndex--
+    }
+    list[preIndex + 1] = currentValue;
+  }
+  console.log('list2 :>> ', list.join(','));
   return list
 }
 
@@ -158,6 +181,6 @@ const sortSet = {
 
 let _randomList = generateRandomNumber(10)
 
-sortSet.selectSort(_randomList)
+sortSet.insertSort(_randomList)
 
 
