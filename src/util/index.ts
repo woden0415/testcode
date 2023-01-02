@@ -40,3 +40,11 @@ export function generateLinkedList(length: number) {
 
 // console.log(generateLinkedList(2))
 // console.log(generateRandomNumber(12))
+
+
+export const arrSwap = (arr: number[], left: number, right: number) => {
+  let temp = arr[left]
+  arr[left] = arr[right]
+  arr[right] = temp;
+  return arr
+}

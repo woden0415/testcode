@@ -1,3 +1,4 @@
+import { arrSwap } from './../../util/index';
 /**
  * 排序算法
  * https://www.runoob.com/w3cnote/ten-sorting-algorithm.html
@@ -169,6 +170,35 @@ function reduceSort(list: number[]) {
  * @returns []
  */
 function quickSort(list: number[]) {
+  console.log('list1 :>> ', list.join(','));
+  if (!list) return list;
+  if (!Array.isArray(list)) return list;
+  if (list.length === 0 || list.length === 1) return list;
+
+  const listLength = list.length;
+
+  const quickInnerSort = (_list: number[], low: number, high: number) => {
+    if (low >= high) return;
+
+    let base = _list[low];
+    let leftPoint = low;
+    let rightPoint = high;
+
+    while (leftPoint < rightPoint) {
+      while (_list[rightPoint] >= base && leftPoint < rightPoint) {
+        rightPoint--
+      }
+      while (_list[leftPoint] <= base && leftPoint < rightPoint) {
+        leftPoint++
+      }
+      arrSwap(_list, leftPoint, rightPoint)
+    }
+    arrSwap(_list, low, rightPoint)
+    quickInnerSort(_list, low, rightPoint - 1);
+    quickInnerSort(_list, rightPoint + 1, high);
+  }
+  quickInnerSort(list, 0, listLength - 1)
+
   return list
 }
 
@@ -227,8 +257,8 @@ const sortSet = {
 }
 
 
-let _randomList = generateRandomNumber(5)
+let _randomList = generateRandomNumber(20)
 
-console.log(sortSet.reduceSort(_randomList))
+console.log(sortSet.quickSort(_randomList))
 
 
