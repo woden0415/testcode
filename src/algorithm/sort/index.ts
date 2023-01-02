@@ -103,6 +103,25 @@ function insertSort(list: number[]) {
  * @returns []
  */
 function shellSort(list: number[]) {
+  console.log('list1 :>> ', list.join(','));
+  if (!list) return list;
+  if (!Array.isArray(list)) return list;
+  if (list.length === 0 || list.length === 1) return list;
+
+  const listLength = list.length;
+
+  for (let step = Math.floor(listLength / 2); step > 0; step = Math.floor(step / 2)) {
+    for (let i = step; i < listLength; i++) {
+      let j = i;
+      let temp = list[j];
+      while (j - step >= 0 && list[j - step] > temp) {
+        list[j] = list[j - step]
+        j = j - step;
+      }
+      list[j] = temp;
+    }
+  }
+  console.log('list2 :>> ', list.join(','));
   return list
 }
 
@@ -113,7 +132,35 @@ function shellSort(list: number[]) {
  * @returns []
  */
 function reduceSort(list: number[]) {
-  return list
+  if (!list) return list;
+  if (!Array.isArray(list)) return list;
+  if (list.length === 0 || list.length === 1) return list;
+
+  const listLength = list.length;
+
+  const merge = (left: number[], right: number[]) => {
+    let result = []
+    while (left.length && right.length) {
+      if (left[0] <= right[0]) {
+        result.push(left.shift())
+      } else {
+        result.push(right.shift())
+      }
+    }
+    while (left.length) {
+      result.push(left.shift())
+    }
+    while (right.length) {
+      result.push(right.shift())
+    }
+    return result;
+  }
+
+  let middle = Math.floor(listLength / 2),
+    left = list.slice(0, middle),
+    right = list.slice(middle);
+
+  return merge(reduceSort(left), reduceSort(right))
 }
 
 /**
@@ -180,8 +227,8 @@ const sortSet = {
 }
 
 
-let _randomList = generateRandomNumber(10)
+let _randomList = generateRandomNumber(5)
 
-sortSet.insertSort(_randomList)
+console.log(sortSet.reduceSort(_randomList))
 
 
