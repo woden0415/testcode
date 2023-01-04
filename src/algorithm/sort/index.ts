@@ -208,7 +208,44 @@ function quickSort(list: number[]) {
  * @returns []
  */
 function stackSort(list: number[]) {
-  return list
+  let len = list.length;
+
+  const heapify = (arr: number[], i: number) => {     // 堆调整
+    var left = 2 * i + 1,
+      right = 2 * i + 2,
+      largest = i;
+
+    if (left < len && arr[left] > arr[largest]) {
+      largest = left;
+    }
+
+    if (right < len && arr[right] > arr[largest]) {
+      largest = right;
+    }
+
+    if (largest != i) {
+      arrSwap(arr, i, largest);
+      heapify(arr, largest);
+    }
+  }
+
+  const buildMaxHeap = (arr: number[]) => {   // 建立大顶堆
+    for (var i = Math.floor(len / 2); i >= 0; i--) {
+      heapify(arr, i);
+    }
+  }
+
+  console.log('list1:>> ', JSON.stringify(list));
+  buildMaxHeap(list);
+  console.log('list2:>> ', JSON.stringify(list));
+
+  for (var i = list.length - 1; i > 0; i--) {
+    arrSwap(list, 0, i);
+    len--;
+    heapify(list, 0);
+  }
+
+  return list;
 }
 
 /**
@@ -257,8 +294,8 @@ const sortSet = {
 }
 
 
-let _randomList = generateRandomNumber(20)
+let _randomList = generateRandomNumber(5)
 
-console.log(sortSet.quickSort(_randomList))
+console.log(sortSet.stackSort(_randomList))
 
 
