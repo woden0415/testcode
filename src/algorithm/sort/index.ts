@@ -170,7 +170,6 @@ function reduceSort(list: number[]) {
  * @returns []
  */
 function quickSort(list: number[]) {
-  console.log('list1 :>> ', list.join(','));
   if (!list) return list;
   if (!Array.isArray(list)) return list;
   if (list.length === 0 || list.length === 1) return list;
@@ -235,9 +234,7 @@ function stackSort(list: number[]) {
     }
   }
 
-  console.log('list1:>> ', JSON.stringify(list));
   buildMaxHeap(list);
-  console.log('list2:>> ', JSON.stringify(list));
 
   for (var i = list.length - 1; i > 0; i--) {
     arrSwap(list, 0, i);
@@ -287,10 +284,7 @@ const sortSet = {
   shellSort: shellSort,
   reduceSort: reduceSort,
   quickSort: quickSort,
-  stackSort: stackSort,
-  countSort: countSort,
-  bucketSort: bucketSort,
-  baseSort: baseSort,
+  stackSort: stackSort
 }
 
 
