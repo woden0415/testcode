@@ -7,23 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    #canvas {
-      width: 500px;
-      height: auto;
-      border: 1px solid black
-    }
+
   </style>
 </head>
 
 <body>
-  <canvas id="canvas"></canvas>
+  <input type="file" name="" id="file">
 </body>
-<script src="./src/Logger.js"></script>
 <script>
-  logger.log("log");
-  logger.warn("warn");
-  logger.error("error");
+  const elementFile=document.querySelector('#file')
+  elementFile.addEventListener('change', function () {
+    const file=elementFile.files[0];
+    console.log('file.type :>> ', file.type);
+    file.text().then((content) => {
+      console.log('内容是：');
+      console.log(content)
+    })
+
+    file.arrayBuffer().then((buffer) => {
+      console.log('buffer :>> ', buffer);
+    })
+  })
 
 </script>
+
 
 </html>
